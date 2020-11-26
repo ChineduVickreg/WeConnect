@@ -1,6 +1,7 @@
 package com.vickreg.project.WeConnect.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vickreg.project.WeConnect.model.post.Comment;
 import com.vickreg.project.WeConnect.model.post.Post;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,11 +22,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Column(nullable = false)
     private String userName;
 
-    @Column(nullable = false)
+
     private String firstName;
-    @Column(nullable = false)
+
     private String lastName;
 
     @Column(nullable = false)
@@ -61,11 +63,17 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Video> allVideos;
 
-    @OneToMany
-    private  List<User> friends;
+    @OneToMany(mappedBy = "friendRequestSender", cascade = CascadeType.ALL)
+    private  List<Friend> friendRequestSender;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "friendRequestReceiver", cascade = CascadeType.ALL)
+    private  List<Friend> friendRequestReceiver;
+
+    @OneToMany( mappedBy = "author", cascade = CascadeType.ALL)
     private List<Post> posts;
+
+    @OneToMany( mappedBy = "commentAuthor", cascade = CascadeType.ALL)
+    private  List<Comment> comments;
 }
 
 

@@ -17,7 +17,7 @@ import java.util.Date;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String commentId;
+    private Integer commentId;
 
     @ManyToOne
     private User commentAuthor;
@@ -25,7 +25,7 @@ public class Comment {
     private String commentBody;
 
     @ManyToOne
-    private Post post_id;
+    private Post post;
 
     private Date commentDate;
     private Time commentTime;

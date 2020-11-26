@@ -14,9 +14,11 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private User beFriended;
+    @ManyToOne
+    private User friendRequestSender;
 
-    @OneToOne
-    private User friendee;
+    @ManyToOne
+    private User friendRequestReceiver;
+
+    private  int status = 1;
 }
